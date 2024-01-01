@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Common.Hosting.DependencyInjection
+namespace Common.Hosting.ServiceProvider
 {
     public static class ServiceProviderExtensions
     {
