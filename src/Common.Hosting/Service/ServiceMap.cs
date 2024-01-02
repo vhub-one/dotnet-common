@@ -42,4 +42,12 @@ namespace Common.Hosting.Service
 
         }
     }
+
+    public static class ServiceMap
+    {
+        public static IServiceMap<TService> Create<TService>(IDictionary<string, TService> services)
+        {
+            return new ServiceMap<TService>(services);
+        }
+    }
 }
