@@ -8,10 +8,12 @@ namespace Common.Hosting.Configuration
         where TOptions : class, new()
     {
         private readonly IConfiguration _configuration;
+        private readonly bool _configurationRequired;
 
-        public OptionsConfigurator(IConfiguration configuration)
+        public OptionsConfigurator(IConfiguration configuration, bool required)
         {
             _configuration = configuration;
+            _configurationRequired = required;
         }
 
         public void Configure(TOptions options)
@@ -24,6 +26,13 @@ namespace Common.Hosting.Configuration
             if (configurationSectionExists)
             {
                 configurationSection.Bind(options);
+            }
+            else
+            {
+                if (_configurationRequired)
+                {
+                    throw new InvalidOperationException($"Configuration is missing for [{sectionName}]");
+                }
             }
         }
     }
